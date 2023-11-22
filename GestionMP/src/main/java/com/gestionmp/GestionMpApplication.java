@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
+import com.gestionmp.entities.Medecin;
 import com.gestionmp.entities.Patient;
 
 @SpringBootApplication
@@ -25,6 +26,6 @@ public class GestionMpApplication implements CommandLineRunner {
 	}
 	@Override
 	public void run(String... args) throws Exception {
-	repositoryRestConfiguration.exposeIdsFor(Patient.class);
+	repositoryRestConfiguration.exposeIdsFor(Patient.class,Medecin.class);
 	}
 }

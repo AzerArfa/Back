@@ -44,6 +44,11 @@ public class PatientRESTController {
 
     
     }
+    @RequestMapping(value="/patsByName/{nomprenomP}",method = RequestMethod.GET)
+    public List<Patient> findByNomPatientContains(@PathVariable("nomprenomP") String nom) {
+    return patientService.findByNomprenomPContains(nom);
+    }
+    
     @DeleteMapping("/{idPatient}")
     public void deletePatient(@PathVariable("idPatient") Long id) {
         patientService.deletePatientById(id);

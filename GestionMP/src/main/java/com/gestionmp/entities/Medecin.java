@@ -27,5 +27,45 @@ public class Medecin {
 	@JsonIgnore
 	@OneToMany(mappedBy = "medecin")
 	private List<Patient> patients;
+
+
+	public Long getIdMedecin() {
+		return idMedecin;
+	}
+
+
+	public void setIdMedecin(Long idMedecin) {
+		this.idMedecin = idMedecin;
+	}
+
+
+	public String getNomprenomM() {
+		return nomprenomM;
+	}
+
+
+	public void setNomprenomM(String nomprenomM) {
+		this.nomprenomM = nomprenomM;
+	}
+
+
+	public String getAdresseM() {
+		return adresseM;
+	}
+
+
+	public void setAdresseM(String adresseM) {
+		this.adresseM = adresseM;
+	}
+
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
 	
 }
