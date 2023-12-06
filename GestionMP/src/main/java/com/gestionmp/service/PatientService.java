@@ -6,12 +6,12 @@ import com.gestionmp.entities.Medecin;
 import com.gestionmp.entities.Patient;
 
 public interface PatientService {
-    PatientDTO savePatient(PatientDTO p);
-    PatientDTO updatePatient(PatientDTO p);
+	Patient savePatient(Patient p);
+	Patient updatePatient(Patient p);
     void deletePatient(Patient p);
     void deletePatientById(Long id);
-    PatientDTO getPatient(Long id);
-    List<PatientDTO> getAllPatients();
+    Patient getPatient(Long id);
+    List<Patient> getAllPatients();
     List<Patient> findByNomprenomP(String nom);
     List<Patient> findByNomprenomPContains(String nom);
     List<Patient> findByNomAge(String nom, int age);
@@ -19,6 +19,4 @@ public interface PatientService {
     List<Patient> findByMedecinIdMedecin(Long id);
     List<Patient> findByOrderByNomprenomPAsc();
     List<Patient> trierPatientsNomsAge();
-    PatientDTO convertEntityToDto (Patient patient);
-    Patient convertDtoToEntity(PatientDTO patientDTO);
 }

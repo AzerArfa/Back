@@ -20,13 +20,13 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public PatientDTO savePatient(PatientDTO p) {
-        return convertEntityToDto(patientRepository.save(convertDtoToEntity(p)));
+    public Patient savePatient(Patient p) {
+        return patientRepository.save(p);
     }
 
     @Override
-    public PatientDTO updatePatient(PatientDTO p) {
-    	return convertEntityToDto(patientRepository.save(convertDtoToEntity(p)));
+    public Patient updatePatient(Patient p) {
+    	return patientRepository.save(p);
     }
 
     @Override
@@ -40,15 +40,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientDTO getPatient(Long id) {
-    	return convertEntityToDto( patientRepository.findById(id).get());
+    public Patient getPatient(Long id) {
+    	return  patientRepository.findById(id).get();
     }
 
     @Override
-    public List<PatientDTO> getAllPatients() {
-    	return patientRepository.findAll().stream()
-    			.map(this::convertEntityToDto)
-    			.collect(Collectors.toList());
+    public List<Patient> getAllPatients() {
+    	return patientRepository.findAll();
     }
 
     @Override
@@ -84,44 +82,6 @@ public class PatientServiceImpl implements PatientService {
 	public List<Patient> findByMedecinIdMedecin(Long id) {
 		return patientRepository.findByMedecinIdMedecin(id);
 	}
-    @Override
-    public PatientDTO convertEntityToDto(Patient patient) {
-     /*PatientDTO PatientDTO = new PatientDTO();
-     PatientDTO.setIdPatient(patient.getIdPatient());
-     PatientDTO.setNomprenomP(patient.getNomprenomP());
-     PatientDTO.setAdresseP(patient.getAdresseP());
-     //PatientDTO.setAge(patient.getAge());
-     PatientDTO.setMaladie(patient.getMaladie());
-     //PatientDTO.setMedecin(patient.getMedecin());
-     return PatientDTO;*/
-     
-     /*return PatientDTO.builder()
-     .idPatient(patient.getIdPatient())
-     .nomprenomP(patient.getNomprenomP())
-     .adresseP(patient.getAdresseP())
-     .Age(patient.getAge())
-     .maladie(patient.getMaladie())
-     .medecin(patient.getMedecin())
-     .nommedecin(patient.getMedecin().getNomprenomM())
-     .build();*/
-    	modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        PatientDTO patientDTO = modelMapper.map(patient, PatientDTO.class);
-        if (patient.getMedecin() != null) {
-            patientDTO.setNommedecin(patient.getMedecin().getNomprenomM());
-        }
-        return patientDTO;
     
-    }
-    @Override
-    public Patient convertDtoToEntity(PatientDTO patientDto) {
-    	Patient patient = new Patient();
-    	patient = modelMapper.map(patientDto, Patient.class);
-    	patient.setIdPatient(patientDto.getIdPatient());
-    	patient.setAdresseP(patientDto.getAdresseP());
-    	patient.setMaladie(patientDto.getMaladie());
-    	patient.setMedecin(patientDto.getMedecin());
-    	patient.setAge(patientDto.getAge());
-     return patient;
-    }
 
 }
