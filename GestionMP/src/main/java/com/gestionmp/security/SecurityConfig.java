@@ -28,7 +28,6 @@ public class SecurityConfig {
 			 public CorsConfiguration getCorsConfiguration(HttpServletRequest 
 			request) {
 			 CorsConfiguration config = new CorsConfiguration();
-			 
 			config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
 			 config.setAllowedMethods(Collections.singletonList("*"));
 			 config.setAllowCredentials(true);
@@ -39,20 +38,17 @@ public class SecurityConfig {
 			 }
 			 }).and()
 	 .authorizeHttpRequests()
-	 //consulter tous les patients
-	 .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER")
-	 //consulter un patient par son id
+	 .anyRequest().permitAll();
+	/* .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER")
 	 .requestMatchers(HttpMethod.GET,"/api/getbyid/**")
 	.hasAnyAuthority("ADMIN","USER")
 
-	//ajouter un nouveau patient
+
 	.requestMatchers(HttpMethod.POST,"/api/addpat/**").hasAnyAuthority("ADMIN")
-	//modifier un patient
 	.requestMatchers(HttpMethod.PUT,"/api/updatepat/**").hasAuthority("ADMIN")
-	//supprimer un patient
-	.requestMatchers(HttpMethod.DELETE,"/api/delpat/{id}").hasAuthority("ADMIN")
+	.requestMatchers(HttpMethod.DELETE,"/api/delpat/**").hasAuthority("ADMIN")
 	.anyRequest().authenticated().and()
-	 .addFilterBefore(new JWTAuthorizationFilter(),BasicAuthenticationFilter.class);
+	 .addFilterBefore(new JWTAuthorizationFilter(),BasicAuthenticationFilter.class);*/
 			 return http.build();
 			 }
 

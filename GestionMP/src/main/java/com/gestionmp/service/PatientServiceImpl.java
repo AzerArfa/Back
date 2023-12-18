@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.gestionmp.dto.PatientDTO;
 import com.gestionmp.entities.Medecin;
 import com.gestionmp.entities.Patient;
+import com.gestionmp.repos.ImageRepository;
 import com.gestionmp.repos.PatientRepository;
 
 @Service
@@ -17,6 +18,8 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     PatientRepository patientRepository;
+    @Autowired
+	ImageRepository imageRepository;
     @Autowired
     ModelMapper modelMapper;
     @Override
@@ -26,7 +29,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient updatePatient(Patient p) {
-    	return patientRepository.save(p);
+    /*Long oldProdImageId =
+    this.getPatient(p.getIdPatient()).getImage().getIdImage();
+    Long newPatImageId = p.getImage().getIdImage();*/
+    Patient patUpdated = patientRepository.save(p);
+   /* if (oldPatImageId != newPatImageId) //si l'image a été modifiée
+    imageRepository.deleteById(oldPatImageId);*/
+    return patUpdated;
     }
 
     @Override
